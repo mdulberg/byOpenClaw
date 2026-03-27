@@ -28,7 +28,8 @@ const renderProduct = (product) => {
   if (!shell) return;
 
   const { name, price, currency, metal, style, size, image, badge, description, details } = product;
-  const images = Array.isArray(image) ? image : [image];
+  const cacheBust = 'v=20260327b';
+  const images = (Array.isArray(image) ? image : [image]).map((src) => `${src}${src.includes('?') ? '&' : '?'}${cacheBust}`);
 
   document.title = `${name} | Anaya Jewelry`;
 
