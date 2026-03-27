@@ -566,9 +566,27 @@ img {
   gap: 1rem;
 }
 
+.detail-image-frame {
+  overflow: hidden;
+  border-radius: 18px;
+  background: #f8ebe3;
+  min-height: 220px;
+}
+
 .detail-media img {
   width: 100%;
+  display: block;
   border-radius: 18px;
+}
+
+.image-fallback {
+  display: grid;
+  place-items: center;
+  min-height: 220px;
+  padding: 1rem;
+  text-align: center;
+  color: var(--ink-soft);
+  font-weight: 700;
 }
 
 .detail-info {

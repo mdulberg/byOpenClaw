@@ -41,7 +41,17 @@ const renderProduct = (product) => {
     <div class="detail-media">
       ${badge ? `<span class="badge">${badge}</span>` : ''}
       <div class="detail-images">
-        ${images.map((src) => `<img src="${src}" alt="${name}">`).join('')}
+        ${images.map((src, index) => `
+          <div class="detail-image-frame">
+            <img
+              src="${src}"
+              alt="${name}${images.length > 1 ? ` image ${index + 1}` : ''}"
+              loading="eager"
+              decoding="sync"
+              onerror="this.style.display='none'; this.parentElement.insertAdjacentHTML('beforeend','<div class=\"image-fallback\">This image is temporarily unavailable. Please refresh the page.</div>');"
+            >
+          </div>
+        `).join('')}
       </div>
     </div>
 
