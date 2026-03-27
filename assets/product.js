@@ -11,6 +11,12 @@ const formatPrice = (value, currency = 'EUR') => {
 
 const getProductId = () => new URLSearchParams(window.location.search).get('id');
 
+const reviewLabel = (product) => {
+  if (product.badge === 'Bestseller') return '4.9 ★ Bestseller rating';
+  if (product.badge === 'Limited') return '4.8 ★ Limited edition favorite';
+  return '4.8 ★ Highly rated';
+};
+
 const renderNotFound = () => {
   if (!shell) return;
   shell.innerHTML = `
@@ -28,7 +34,7 @@ const renderProduct = (product) => {
   if (!shell) return;
 
   const { name, price, currency, metal, style, size, image, badge, description, details } = product;
-  const cacheBust = 'v=20260327b';
+  const cacheBust = 'v=20260327c';
   const images = (Array.isArray(image) ? image : [image]).map((src) => `${src}${src.includes('?') ? '&' : '?'}${cacheBust}`);
 
   document.title = `${name} | Anaya Jewelry`;
@@ -47,7 +53,7 @@ const renderProduct = (product) => {
               src="${src}"
               alt="${name}${images.length > 1 ? ` image ${index + 1}` : ''}"
               loading="eager"
-              decoding="sync"
+              decoding="async"
               onerror="this.style.display='none'; this.parentElement.insertAdjacentHTML('beforeend','<div class=\"image-fallback\">This image is temporarily unavailable. Please refresh the page.</div>');"
             >
           </div>
@@ -64,15 +70,48 @@ const renderProduct = (product) => {
         <span class="pill">${style}</span>
         <span class="pill">${size}</span>
       </div>
+
+      <div class="detail-highlights">
+        <div class="detail-highlight">
+          <strong>${reviewLabel(product)}</strong>
+          <span>Customer-favorite styling</span>
+        </div>
+        <div class="detail-highlight">
+          <strong>Ships in 2–4 business days</strong>
+          <span>Clear shipping expectation</span>
+        </div>
+        <div class="detail-highlight">
+          <strong>Secure HTTPS site</strong>
+          <span>Safe browsing experience</span>
+        </div>
+      </div>
+
       <p class="detail-desc">${description}</p>
-      <ul class="detail-list">
-        ${(details || []).map((item) => `<li>${item}</li>`).join('')}
-      </ul>
+
+      <div class="spec-card">
+        <h2>Product details</h2>
+        <ul class="detail-list">
+          <li><strong>Material:</strong> ${metal}</li>
+          <li><strong>Style:</strong> ${style}</li>
+          <li><strong>Size:</strong> ${size}</li>
+          ${(details || []).map((item) => `<li>${item}</li>`).join('')}
+        </ul>
+      </div>
+
+      <div class="spec-card">
+        <h2>Why shoppers like it</h2>
+        <ul class="detail-list">
+          <li>Multiple product angles shown when available</li>
+          <li>Clear specs and wearable sizing information</li>
+          <li>Gift-friendly styling and easy browsing on mobile</li>
+        </ul>
+      </div>
+
       <div class="detail-actions">
         <a class="cta cta--solid" href="index.html#catalog">Browse more pieces</a>
-        <a class="cta cta--ghost" href="mailto:mdulberg@gmail.com?subject=${encodeURIComponent(`Question about ${name}`)}">Ask about this piece</a>
+        <a class="cta cta--ghost" href="mailto:anayaofstillorgan@gmail.com?subject=${encodeURIComponent(`Question about ${name}`)}">Ask about this piece</a>
       </div>
-      <p class="note">Questions welcome — reach out directly and we’ll help you find the right piece.</p>
+      <p class="note">Questions welcome — email anayaofstillorgan@gmail.com and we’ll help you choose the right piece.</p>
     </div>
   `;
 };
