@@ -1,7 +1,4 @@
 const gridEl = document.querySelector('[data-product-grid]');
-const searchInput = document.querySelector('[data-search-input]');
-const styleFilter = document.querySelector('[data-style-filter]');
-const metalFilter = document.querySelector('[data-metal-filter]');
 const categoryButtons = Array.from(document.querySelectorAll('[data-category-filter]'));
 const resultsMeta = document.querySelector('[data-results-meta]');
 
@@ -62,28 +59,11 @@ const updateResultsMeta = (count) => {
   resultsMeta.textContent = `${count} product${count === 1 ? '' : 's'} shown`;
 };
 
-const applyFilters = () => {
-  const search = (searchInput?.value || '').trim().toLowerCase();
-  const style = styleFilter?.value || 'all';
-  const metal = metalFilter?.value || 'all';
-
+const applyCategoryFilter = () => {
   const filtered = allProducts.filter((product) => {
-    const matchesSearch = !search || [
-      product.name,
-      product.description,
-      product.style,
-      product.metal,
-      product.size,
-      ...(product.details || [])
-    ].join(' ').toLowerCase().includes(search);
-
-    const matchesStyle = style === 'all' || product.style === style;
-    const matchesMetal = metal === 'all' || product.metal === metal;
-    const matchesCategory = activeCategory === 'all'
+    return activeCategory === 'all'
       || product.style === activeCategory
       || product.badge === activeCategory;
-
-    return matchesSearch && matchesStyle && matchesMetal && matchesCategory;
   });
 
   renderProducts(filtered);
@@ -97,8 +77,8 @@ const renderProducts = (products = []) => {
     gridEl.innerHTML = `
       <div class="product-card product-card--empty">
         <div class="product-body">
-          <p class="product-name">No products match those filters.</p>
-          <p class="product-meta">Try another search or choose a different category.</p>
+          <p class="product-name">No products match that category.</p>
+          <p class="product-meta">Try another selection above.</p>
         </div>
       </div>
     `;
@@ -121,15 +101,11 @@ const showError = () => {
 };
 
 const bindFilters = () => {
-  searchInput?.addEventListener('input', applyFilters);
-  styleFilter?.addEventListener('change', applyFilters);
-  metalFilter?.addEventListener('change', applyFilters);
-
   categoryButtons.forEach((button) => {
     button.addEventListener('click', () => {
       activeCategory = button.dataset.categoryFilter || 'all';
       categoryButtons.forEach((item) => item.classList.toggle('is-active', item === button));
-      applyFilters();
+      applyCategoryFilter();
     });
   });
 };
@@ -140,7 +116,7 @@ const loadProducts = async () => {
     if (!res.ok) throw new Error('Network error');
     allProducts = await res.json();
     bindFilters();
-    applyFilters();
+    applyCategoryFilter();
   } catch (err) {
     console.error(err);
     showError();
