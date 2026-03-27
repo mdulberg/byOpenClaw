@@ -1,20 +1,20 @@
-@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=DM+Serif+Display:ital@0;1&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&family=Cormorant+Garamond:wght@500;600;700&display=swap');
 
 :root {
-  --bg: #fffaf9;
-  --bg-soft: #fff1f2;
+  --bg: #fff9fc;
+  --bg-soft: #fff0f7;
   --surface-solid: rgba(255, 255, 255, 0.98);
-  --ink: #4b2f38;
-  --ink-soft: #7d626a;
-  --line: #f2dbe2;
-  --line-strong: #e9c5d0;
-  --accent: #d67b96;
-  --accent-deep: #b85f79;
-  --accent-soft: #fff0f4;
-  --butter: #fff5dc;
-  --mint: #f2fbf4;
-  --shadow: 0 18px 45px rgba(191, 111, 139, 0.12);
-  --shadow-strong: 0 24px 60px rgba(191, 111, 139, 0.18);
+  --ink: #5a3245;
+  --ink-soft: #8a6676;
+  --line: #f3d7e6;
+  --line-strong: #e9bfd3;
+  --accent: #e07aa8;
+  --accent-deep: #c45b8b;
+  --accent-soft: #fff0f7;
+  --butter: #fff4df;
+  --mint: #f3fbf5;
+  --shadow: 0 18px 45px rgba(203, 106, 154, 0.14);
+  --shadow-strong: 0 24px 60px rgba(203, 106, 154, 0.22);
   --max-width: 1200px;
 }
 
@@ -23,12 +23,12 @@ html { scroll-behavior: smooth; }
 body {
   margin: 0;
   min-height: 100vh;
-  font-family: 'Nunito', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-family: 'Quicksand', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   color: var(--ink);
   background:
-    radial-gradient(circle at top left, rgba(255, 223, 231, 0.65), transparent 25%),
-    radial-gradient(circle at top right, rgba(255, 239, 214, 0.45), transparent 22%),
-    linear-gradient(180deg, #fffaf9 0%, #fff5f7 40%, #ffffff 100%);
+    radial-gradient(circle at top left, rgba(255, 215, 233, 0.72), transparent 25%),
+    radial-gradient(circle at top right, rgba(255, 236, 214, 0.45), transparent 22%),
+    linear-gradient(180deg, #fffafd 0%, #fff2f8 40%, #ffffff 100%);
 }
 
 a { color: inherit; text-decoration: none; }
@@ -85,8 +85,8 @@ button { cursor: pointer; }
 }
 
 .brand-name {
-  font-family: 'DM Serif Display', serif;
-  font-size: 1.4rem;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.55rem;
   font-weight: 400;
 }
 
@@ -132,7 +132,7 @@ button { cursor: pointer; }
 
 .cta:hover { transform: translateY(-2px); box-shadow: 0 14px 30px rgba(214, 123, 150, 0.16); }
 .cta--solid {
-  background: linear-gradient(135deg, #e387a3 0%, var(--accent-deep) 100%);
+  background: linear-gradient(135deg, #ec93bb 0%, var(--accent-deep) 100%);
   border-color: transparent;
   color: #fff;
 }
@@ -228,7 +228,7 @@ button { cursor: pointer; }
   z-index: 2;
   border-radius: 30px;
   overflow: hidden;
-  background: linear-gradient(180deg, rgba(255,255,255,0.98) 0%, rgba(255,245,247,0.92) 100%);
+  background: linear-gradient(180deg, rgba(255,255,255,0.99) 0%, rgba(255,240,247,0.94) 100%);
 }
 
 .hero-feature__image-wrap { aspect-ratio: 4 / 4.2; overflow: hidden; background: #fff0f4; }
@@ -261,7 +261,7 @@ button { cursor: pointer; }
   border-radius: 22px;
   display: grid;
   gap: 0.35rem;
-  background: linear-gradient(180deg, rgba(255,255,255,0.98) 0%, rgba(255,245,247,0.86) 100%);
+  background: linear-gradient(180deg, rgba(255,255,255,0.99) 0%, rgba(255,240,247,0.90) 100%);
 }
 .trust-item strong { font-size: 0.98rem; }
 .trust-item span { color: var(--ink-soft); line-height: 1.55; }
@@ -344,7 +344,7 @@ button { cursor: pointer; }
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  background: linear-gradient(180deg, #fff8fa 0%, #ffffff 100%);
+  background: linear-gradient(180deg, #fff5fa 0%, #ffffff 100%);
 }
 .promise__quote {
   margin: 0 0 1.5rem;
@@ -389,15 +389,10 @@ button { cursor: pointer; }
 .detail-media { position: relative; padding: 1rem; }
 .detail-images { display: grid; gap: 1rem; }
 .detail-image-frame { overflow: hidden; border-radius: 20px; background: #fff0f4; min-height: 220px; }
+.detail-image-frame.is-hidden { display: none; }
 .detail-media img { width: 100%; display: block; border-radius: 20px; }
 .image-fallback {
-  display: grid;
-  place-items: center;
-  min-height: 220px;
-  padding: 1rem;
-  text-align: center;
-  color: var(--ink-soft);
-  font-weight: 700;
+  display: none;
 }
 .detail-info { padding: 1.6rem; }
 .detail-info h1 { margin: 0 0 0.5rem; font-size: clamp(2rem, 4vw, 3rem); }
@@ -439,7 +434,7 @@ button { cursor: pointer; }
 .quote {
   border-radius: 26px;
   padding: 1.45rem 1.6rem;
-  background: linear-gradient(180deg, #fff2f6 0%, #fffafc 100%);
+  background: linear-gradient(180deg, #ffeef6 0%, #fffafd 100%);
   border: 1px solid rgba(233, 197, 208, 0.75);
   font-family: 'DM Serif Display', serif;
   font-size: clamp(1.4rem, 2.7vw, 2rem);

@@ -22,13 +22,7 @@ const attachImageFallbacks = () => {
     img.addEventListener('error', () => {
       const frame = img.closest('.detail-image-frame');
       if (!frame) return;
-      img.remove();
-      if (!frame.querySelector('.image-fallback')) {
-        const fallback = document.createElement('div');
-        fallback.className = 'image-fallback';
-        fallback.textContent = 'This image is temporarily unavailable. Please refresh the page.';
-        frame.appendChild(fallback);
-      }
+      frame.classList.add('is-hidden');
     }, { once: true });
   });
 };
@@ -50,7 +44,7 @@ const renderProduct = (product) => {
   if (!shell) return;
 
   const { name, price, currency, metal, style, size, image, badge, description, details } = product;
-  const cacheBust = 'v=20260327d';
+  const cacheBust = 'v=20260327e';
   const images = (Array.isArray(image) ? image : [image]).map((src) => `${src}${src.includes('?') ? '&' : '?'}${cacheBust}`);
 
   document.title = `${name} | Anaya Jewelry`;
@@ -89,15 +83,15 @@ const renderProduct = (product) => {
       <div class="detail-highlights">
         <div class="detail-highlight">
           <strong>${reviewLabel(product)}</strong>
-          <span>Small-shop favorite with a personal touch</span>
+          <span>Pretty, giftable, and easy to love</span>
         </div>
         <div class="detail-highlight">
           <strong>Ships in 2–4 business days</strong>
-          <span>Easy, clear shipping expectation</span>
+          <span>Simple and clear shipping info</span>
         </div>
         <div class="detail-highlight">
           <strong>Multiple photos when available</strong>
-          <span>So you can see the piece a little better</span>
+          <span>So you can get a better feel for the piece</span>
         </div>
       </div>
 
@@ -116,9 +110,9 @@ const renderProduct = (product) => {
       <div class="spec-card">
         <h2>Why people like it</h2>
         <ul class="detail-list">
+          <li>Sweet boutique feel</li>
           <li>Easy to browse on mobile</li>
-          <li>Clear size and material information</li>
-          <li>Gift-friendly, small-shop feel</li>
+          <li>Lovely for gifting or everyday wear</li>
         </ul>
       </div>
 
