@@ -12,9 +12,25 @@ const formatPrice = (value, currency = 'EUR') => {
 const getProductId = () => new URLSearchParams(window.location.search).get('id');
 
 const reviewLabel = (product) => {
-  if (product.badge === 'Bestseller') return '4.9 ★ Bestseller rating';
-  if (product.badge === 'Limited') return '4.8 ★ Limited edition favorite';
-  return '4.8 ★ Highly rated';
+  if (product.badge === 'Bestseller') return '4.9 ★ Bestseller favorite';
+  if (product.badge === 'Limited') return '4.8 ★ Limited edition love';
+  return '4.8 ★ Loved by shoppers';
+};
+
+const attachImageFallbacks = () => {
+  document.querySelectorAll('.detail-media img').forEach((img) => {
+    img.addEventListener('error', () => {
+      const frame = img.closest('.detail-image-frame');
+      if (!frame) return;
+      img.remove();
+      if (!frame.querySelector('.image-fallback')) {
+        const fallback = document.createElement('div');
+        fallback.className = 'image-fallback';
+        fallback.textContent = 'This image is temporarily unavailable. Please refresh the page.';
+        frame.appendChild(fallback);
+      }
+    }, { once: true });
+  });
 };
 
 const renderNotFound = () => {
@@ -34,7 +50,7 @@ const renderProduct = (product) => {
   if (!shell) return;
 
   const { name, price, currency, metal, style, size, image, badge, description, details } = product;
-  const cacheBust = 'v=20260327c';
+  const cacheBust = 'v=20260327d';
   const images = (Array.isArray(image) ? image : [image]).map((src) => `${src}${src.includes('?') ? '&' : '?'}${cacheBust}`);
 
   document.title = `${name} | Anaya Jewelry`;
@@ -54,7 +70,6 @@ const renderProduct = (product) => {
               alt="${name}${images.length > 1 ? ` image ${index + 1}` : ''}"
               loading="eager"
               decoding="async"
-              onerror="this.style.display='none'; this.parentElement.insertAdjacentHTML('beforeend','<div class=\"image-fallback\">This image is temporarily unavailable. Please refresh the page.</div>');"
             >
           </div>
         `).join('')}
@@ -74,15 +89,15 @@ const renderProduct = (product) => {
       <div class="detail-highlights">
         <div class="detail-highlight">
           <strong>${reviewLabel(product)}</strong>
-          <span>Customer-favorite styling</span>
+          <span>Small-shop favorite with a personal touch</span>
         </div>
         <div class="detail-highlight">
           <strong>Ships in 2–4 business days</strong>
-          <span>Clear shipping expectation</span>
+          <span>Easy, clear shipping expectation</span>
         </div>
         <div class="detail-highlight">
-          <strong>Secure HTTPS site</strong>
-          <span>Safe browsing experience</span>
+          <strong>Multiple photos when available</strong>
+          <span>So you can see the piece a little better</span>
         </div>
       </div>
 
@@ -99,11 +114,11 @@ const renderProduct = (product) => {
       </div>
 
       <div class="spec-card">
-        <h2>Why shoppers like it</h2>
+        <h2>Why people like it</h2>
         <ul class="detail-list">
-          <li>Multiple product angles shown when available</li>
-          <li>Clear specs and wearable sizing information</li>
-          <li>Gift-friendly styling and easy browsing on mobile</li>
+          <li>Easy to browse on mobile</li>
+          <li>Clear size and material information</li>
+          <li>Gift-friendly, small-shop feel</li>
         </ul>
       </div>
 
@@ -114,6 +129,8 @@ const renderProduct = (product) => {
       <p class="note">Questions welcome — email anayaofstillorgan@gmail.com and we’ll help you choose the right piece.</p>
     </div>
   `;
+
+  attachImageFallbacks();
 };
 
 const loadProduct = async () => {
