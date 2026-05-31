@@ -17,7 +17,7 @@ After creating the repository, GitHub will show you commands. Run these in your 
 
 ```bash
 cd /path/to/byOpenClaw
-git remote add origin https://github.com/mdulberg/YOUR-REPO-NAME.git
+git remote add origin https://github.com/YOUR-USERNAME/YOUR-REPO-NAME.git
 git push -u origin main
 ```
 
@@ -27,7 +27,7 @@ Replace `YOUR-REPO-NAME` with the actual repository name you created.
 
 ## Step 3: Enable GitHub Pages
 
-1. Go to your repository on GitHub: `https://github.com/mdulberg/YOUR-REPO-NAME`
+1. Go to your repository on GitHub: `https://github.com/YOUR-USERNAME/YOUR-REPO-NAME`
 2. Click **Settings** (top menu)
 3. Scroll down to **Pages** (left sidebar)
 4. Under **Source**, select:
@@ -35,7 +35,7 @@ Replace `YOUR-REPO-NAME` with the actual repository name you created.
    - Folder: **/ (root)**
 5. Click **Save**
 
-Your site will be live at: `https://mdulberg.github.io/YOUR-REPO-NAME/`
+Your site will be live at: `https://YOUR-USERNAME.github.io/YOUR-REPO-NAME/`
 
 ## Step 4: Configure Custom Domain
 
@@ -67,7 +67,7 @@ If you want `www.thedulberg.com`:
 
 | Type | Name | Value | TTL |
 |------|------|-------|-----|
-| CNAME | www | mdulberg.github.io | 3600 |
+| CNAME | www | YOUR-USERNAME.github.io | 3600 |
 
 ### Common Domain Registrars:
 

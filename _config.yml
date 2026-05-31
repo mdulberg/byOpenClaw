@@ -1,0 +1,8 @@
+# GitHub Pages (Jekyll) configuration.
+# Keep internal docs out of the published site so they are not fetchable
+# by site visitors at thedulberg.com/README.md, /DEPLOYMENT.md, etc.
+exclude:
+  - README.md
+  - DEPLOYMENT.md
+  - .gitignore
+  - .git

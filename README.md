@@ -22,7 +22,7 @@ This site is configured to be published via GitHub Pages at thedulberg.com.
 
 3. **Push to GitHub**:
    ```bash
-   git remote add origin https://github.com/mdulberg/YOUR-REPO-NAME.git
+   git remote add origin https://github.com/YOUR-USERNAME/YOUR-REPO-NAME.git
    git branch -M main
    git push -u origin main
    ```
@@ -47,7 +47,7 @@ This site is configured to be published via GitHub Pages at thedulberg.com.
      - `185.199.111.153`
    - OR add a **CNAME record**:
      - Name: `@` (or `www`)
-     - Value: `mdulberg.github.io` (replace with your GitHub username)
+     - Value: `YOUR-USERNAME.github.io` (replace with your GitHub username)
 
 7. **Wait for DNS Propagation**:
    - DNS changes can take 24-48 hours to propagate
