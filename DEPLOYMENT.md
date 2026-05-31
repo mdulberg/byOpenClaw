@@ -16,7 +16,7 @@ Your Anaya Jewelry website is ready to be published! Follow these steps:
 After creating the repository, GitHub will show you commands. Run these in your terminal:
 
 ```bash
-cd /home/micky/Documents/Anaya
+cd /path/to/byOpenClaw
 git remote add origin https://github.com/mdulberg/YOUR-REPO-NAME.git
 git push -u origin main
 ```
@@ -117,7 +117,7 @@ If you want `www.thedulberg.com`:
 After making changes:
 
 ```bash
-cd /home/micky/Documents/Anaya
+cd /path/to/byOpenClaw
 git add .
 git commit -m "Description of changes"
 git push

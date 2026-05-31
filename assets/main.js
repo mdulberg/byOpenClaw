@@ -14,9 +14,9 @@ const formatPrice = (value, currency = 'EUR') => {
 };
 
 const reviewLabel = (product) => {
-  if (product.badge === 'Bestseller') return '4.9 ★ Bestseller';
-  if (product.badge === 'Limited') return '4.8 ★ Limited edition';
-  return '4.8 ★ Customer favorite';
+  if (product.badge === 'Bestseller') return 'Bestseller';
+  if (product.badge === 'Limited') return 'Limited edition';
+  return 'Customer favorite';
 };
 
 const shippingLabel = 'Ships in 2–4 business days';

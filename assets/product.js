@@ -12,9 +12,9 @@ const formatPrice = (value, currency = 'EUR') => {
 const getProductId = () => new URLSearchParams(window.location.search).get('id');
 
 const reviewLabel = (product) => {
-  if (product.badge === 'Bestseller') return '4.9 ★ Bestseller favorite';
-  if (product.badge === 'Limited') return '4.8 ★ Limited edition love';
-  return '4.8 ★ Loved by shoppers';
+  if (product.badge === 'Bestseller') return 'Bestseller favorite';
+  if (product.badge === 'Limited') return 'Limited edition love';
+  return 'Loved by shoppers';
 };
 
 const attachImageFallbacks = () => {
@@ -48,6 +48,15 @@ const renderProduct = (product) => {
   const images = (Array.isArray(image) ? image : [image]).map((src) => `${src}${src.includes('?') ? '&' : '?'}${cacheBust}`);
 
   document.title = `${name} | Anaya Jewelry`;
+
+  const mainImage = (Array.isArray(image) ? image[0] : image) || 'Product_Images/1.1.JPG';
+  const setMeta = (property, content) => {
+    const el = document.querySelector(`meta[property="${property}"]`);
+    if (el) el.setAttribute('content', content);
+  };
+  setMeta('og:title', `${name} | Anaya Jewelry`);
+  setMeta('og:description', description);
+  setMeta('og:image', `https://thedulberg.com/${mainImage}`);
 
   if (crumbsEl) {
     crumbsEl.textContent = `Home / Collection / ${name}`;
@@ -134,7 +143,7 @@ const loadProduct = async () => {
     const res = await fetch('data/products.json', { cache: 'no-store' });
     if (!res.ok) throw new Error('Network error');
     const data = await res.json();
-    const product = data.find((item) => item.id === id) || data[0];
+    const product = data.find((item) => item.id === id);
 
     if (!product) {
       renderNotFound();
